@@ -1,1 +1,162 @@
-<h1>Lab 1</h1>
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Triangle Lab</title>
+</head>
+<body>
+
+<h1>Triangle calculator</h1>
+<h3>Вікторія Прийдун</h3>
+<p>Відкрий консоль (F12 → Console) і викликай <b>triangle()</b></p>
+
+<script>
+
+console.log("Функція: triangle(value1, type1, value2, type2)");
+console.log('Типи: "leg", "hypotenuse", "angle", "adjacent angle", "opposite angle"');
+
+function degreesToRadians(d){
+  return d * Math.PI / 180;
+}
+
+function radiansToDegrees(r){
+  return r * 180 / Math.PI;
+}
+
+function isValidNumber(n){
+  return typeof n === "number" && n > 0;
+}
+
+function roundValue(x){
+  return Math.round(x * 1000) / 1000;
+}
+
+
+function triangle(val1, type1, val2, type2){
+
+  if(!isValidNumber(val1) || !isValidNumber(val2)){
+    return "Некоректні числа";
+  }
+
+  if (typeof type1 !== "string" || typeof type2 !== "string"){
+    return "failed";
+  }
+
+  let t1 = type1.toLowerCase().trim();
+  let t2 = type2.toLowerCase().trim();
+
+
+  if (
+    t1 !== "leg" &&
+    t1 !== "hypotenuse" &&
+    t1 !== "angle" &&
+    t1 !== "adjacent angle" &&
+    t1 !== "opposite angle"
+  ) {
+    console.log("Невірний тип. Перечитай інструкцію у консолі.");
+    return "failed";
+  }
+
+  if (
+    t2 !== "leg" &&
+    t2 !== "hypotenuse" &&
+    t2 !== "angle" &&
+    t2 !== "adjacent angle" &&
+    t2 !== "opposite angle"
+  ) {
+    console.log("Невірний тип. Перечитай інструкцію у консолі.");
+    return "failed";
+  }
+
+  let sideA, sideB, sideC, angleA, angleB;
+
+  // катет + катет
+  if(t1 === "leg" && t2 === "leg"){
+    sideA = val1;
+    sideB = val2;
+    sideC = Math.sqrt(sideA**2 + sideB**2);
+    angleA = radiansToDegrees(Math.asin(sideA/sideC));
+    angleB = 90 - angleA;
+  }
+
+  // катет + гіпотенуза
+  else if(t1 === "leg" && t2 === "hypotenuse"){
+    sideA = val1;
+    sideC = val2;
+    if(sideC <= sideA) return "Гіпотенуза менша за катет";
+    sideB = Math.sqrt(sideC**2 - sideA**2);
+    angleA = radiansToDegrees(Math.asin(sideA/sideC));
+    angleB = 90 - angleA;
+  }
+
+  // гіпотенуза + катет (навпаки)
+  else if(t1 === "hypotenuse" && t2 === "leg"){
+    return triangle(val2, "leg", val1, "hypotenuse");
+  }
+
+  // гіпотенуза + кут
+  else if(t1 === "hypotenuse" && t2 === "angle"){
+    sideC = val1;
+    angleA = val2;
+    if(angleA <= 0 || angleA >= 90) return "Кут не гострий";
+    angleB = 90 - angleA;
+    sideA = sideC * Math.sin(degreesToRadians(angleA));
+    sideB = sideC * Math.cos(degreesToRadians(angleA));
+  }
+
+  // кут + гіпотенуза (навпаки)
+  else if(t1 === "angle" && t2 === "hypotenuse"){
+    return triangle(val2, "hypotenuse", val1, "angle");
+  }
+
+  // катет + протилежний кут
+  else if(t1 === "leg" && t2 === "opposite angle"){
+    sideA = val1;
+    angleA = val2;
+    if(angleA <= 0 || angleA >= 90) return "Кут не гострий";
+    angleB = 90 - angleA;
+    sideC = sideA / Math.sin(degreesToRadians(angleA));
+    sideB = sideA / Math.tan(degreesToRadians(angleA));
+  }
+
+  // протилежний кут + катет (навпаки)
+  else if(t1 === "opposite angle" && t2 === "leg"){
+    return triangle(val2, "leg", val1, "opposite angle");
+  }
+
+  // катет + прилеглий кут
+  else if(t1 === "leg" && t2 === "adjacent angle"){
+    sideA = val1;
+    angleB = val2;
+    if(angleB <= 0 || angleB >= 90) return "Кут не гострий";
+    angleA = 90 - angleB;
+    sideC = sideA / Math.cos(degreesToRadians(angleB));
+    sideB = sideA * Math.tan(degreesToRadians(angleB));
+  }
+
+  // прилеглий кут + катет (навпаки)
+  else if(t1 === "adjacent angle" && t2 === "leg"){
+    return triangle(val2, "leg", val1, "adjacent angle");
+  }
+
+  else{
+    console.log("Непідтримувана комбінація");
+    return "failed";
+  }
+
+  console.log("a =", roundValue(sideA));
+  console.log("b =", roundValue(sideB));
+  console.log("c =", roundValue(sideC));
+  console.log("alpha =", roundValue(angleA) + "°");
+  console.log("beta =", roundValue(angleB) + "°");
+
+  return "success";
+}
+
+window.triangle = triangle;
+
+</script>
+
+</body>
+</html>
+
