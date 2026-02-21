@@ -71,14 +71,18 @@ function triangle(val1, type1, val2, type2){
   let sideA, sideB, sideC, angleA, angleB;
 
   // катет + катет
-  if(t1 === "leg" && t2 === "leg"){
-    sideA = val1;
-    sideB = val2;
-    sideC = Math.sqrt(sideA**2 + sideB**2);
-    angleA = radiansToDegrees(Math.asin(sideA/sideC));
-    angleB = 90 - angleA;
+ if(t1 === "leg" && t2 === "leg"){
+  sideA = val1;
+  sideB = val2;
+
+  if (sideA / sideB > 1e8 || sideB / sideA > 1e8) {
+    return "Занадто велика різниця між катетами — можливий кут ≈ 0°";
   }
 
+  sideC = Math.sqrt(sideA**2 + sideB**2);
+  angleA = radiansToDegrees(Math.asin(sideA/sideC));
+  angleB = 90 - angleA;
+}
   // катет + гіпотенуза
   else if(t1 === "leg" && t2 === "hypotenuse"){
     sideA = val1;
