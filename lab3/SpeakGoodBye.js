@@ -1,3 +1,4 @@
+
 (function(window) {
     var speakWord = "Good Bye";
 let goodbyeSpeakWord={};
