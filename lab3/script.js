@@ -4,7 +4,7 @@
 console.log("First task (Hello / Goodbye)");
 for (let i=0;i<names.length;i++) {
     
-first=names[i].charAt(0).toLowerCase();
+let first=names[i].charAt(0).toLowerCase();
   
   if (first==="j") {
       helloSpeakWord.speak(names[i]);
