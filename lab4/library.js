@@ -1,18 +1,10 @@
 const LIBRARY = {
-  prepareArray(arr) {
-    let hasUndefined = arr.includes(undefined);
-
-    if (hasUndefined) {
-      console.log("У масиві були undefined-елементи. Їх видалено перед сортуванням.");
-    }
-
-    return arr.filter(item => item !== undefined);
-  },
-
   bubbleSort(arr, order) {
     let countOperations = 0;
     let countComparisons = 0;
-    let result = this.prepareArray([...arr]);
+
+    let undefinedCount = arr.filter(item => item === undefined).length;
+    let result = arr.filter(item => item !== undefined);
 
     if (order === "asc") {
       for (let i = 0; i < result.length - 1; i++) {
@@ -40,6 +32,10 @@ const LIBRARY = {
       }
     }
 
+    for (let i = 0; i < undefinedCount; i++) {
+      result.push(undefined);
+    }
+
     console.log("Кількість порівнянь:", countComparisons);
     console.log("Кількість обмінів:", countOperations);
     return result;
@@ -48,7 +44,9 @@ const LIBRARY = {
   selectionSort(arr, order) {
     let countOperations = 0;
     let countComparisons = 0;
-    let result = this.prepareArray([...arr]);
+
+    let undefinedCount = arr.filter(item => item === undefined).length;
+    let result = arr.filter(item => item !== undefined);
 
     if (order === "asc") {
       for (let i = 0; i < result.length - 1; i++) {
@@ -88,6 +86,10 @@ const LIBRARY = {
       }
     }
 
+    for (let i = 0; i < undefinedCount; i++) {
+      result.push(undefined);
+    }
+
     console.log("Кількість порівнянь:", countComparisons);
     console.log("Кількість обмінів:", countOperations);
     return result;
@@ -96,7 +98,9 @@ const LIBRARY = {
   insertionSort(arr, order) {
     let countOperations = 0;
     let countComparisons = 0;
-    let result = this.prepareArray([...arr]);
+
+    let undefinedCount = arr.filter(item => item === undefined).length;
+    let result = arr.filter(item => item !== undefined);
 
     if (order === "asc") {
       for (let i = 1; i < result.length; i++) {
@@ -136,6 +140,10 @@ const LIBRARY = {
       }
     }
 
+    for (let i = 0; i < undefinedCount; i++) {
+      result.push(undefined);
+    }
+
     console.log("Кількість порівнянь:", countComparisons);
     console.log("Кількість переміщень:", countOperations);
     return result;
@@ -144,7 +152,10 @@ const LIBRARY = {
   shellSort(arr, order) {
     let countOperations = 0;
     let countComparisons = 0;
-    let result = this.prepareArray([...arr]);
+
+    let undefinedCount = arr.filter(item => item === undefined).length;
+    let result = arr.filter(item => item !== undefined);
+
     let gap = Math.floor(result.length / 2);
 
     if (order === "asc") {
@@ -193,6 +204,10 @@ const LIBRARY = {
       }
     }
 
+    for (let i = 0; i < undefinedCount; i++) {
+      result.push(undefined);
+    }
+
     console.log("Кількість порівнянь:", countComparisons);
     console.log("Кількість переміщень:", countOperations);
     return result;
@@ -201,7 +216,9 @@ const LIBRARY = {
   quickSort(arr, order) {
     let countOperations = 0;
     let countComparisons = 0;
-    let result = this.prepareArray([...arr]);
+
+    let undefinedCount = arr.filter(item => item === undefined).length;
+    let result = arr.filter(item => item !== undefined);
 
     function sort(left, right) {
       let i = left;
@@ -210,41 +227,29 @@ const LIBRARY = {
 
       while (i <= j) {
         if (order === "asc") {
-          while (true) {
+          while (result[i] < pivot) {
             countComparisons++;
-            if (result[i] < pivot) {
-              i++;
-            } else {
-              break;
-            }
+            i++;
           }
+          countComparisons++;
 
-          while (true) {
+          while (result[j] > pivot) {
             countComparisons++;
-            if (result[j] > pivot) {
-              j--;
-            } else {
-              break;
-            }
+            j--;
           }
+          countComparisons++;
         } else if (order === "desc") {
-          while (true) {
+          while (result[i] > pivot) {
             countComparisons++;
-            if (result[i] > pivot) {
-              i++;
-            } else {
-              break;
-            }
+            i++;
           }
+          countComparisons++;
 
-          while (true) {
+          while (result[j] < pivot) {
             countComparisons++;
-            if (result[j] < pivot) {
-              j--;
-            } else {
-              break;
-            }
+            j--;
           }
+          countComparisons++;
         }
 
         if (i <= j) {
@@ -261,14 +266,19 @@ const LIBRARY = {
       if (i < right) sort(i, right);
     }
 
-    sort(0, result.length - 1);
+    if (result.length > 1) {
+      sort(0, result.length - 1);
+    }
+
+    for (let i = 0; i < undefinedCount; i++) {
+      result.push(undefined);
+    }
 
     console.log("Кількість порівнянь:", countComparisons);
     console.log("Кількість обмінів:", countOperations);
     return result;
   }
 };
-
 
 
 
