@@ -1,8 +1,8 @@
 const content = document.getElementById("content");
 const catalogLink = document.getElementById("catalogLink");
 
-catalogLink.addEventListener("click", function (event) {
-    event.preventDefault();
+catalogLink.addEventListener("click", function () {
+    
     loadCatalog();
 });
 
