@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота Ajax</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <button class="burger" id="burger">☰</button>
+
+  <nav class="menu" id="menu">
+    <a href="#">🏠 Головна</a>
+    <a href="#">🖼 Галерея</a>
+    <a href="#">ℹ️ Про нас</a>
+    <a href="#">📞 Контакти</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Адаптивна веб-сторінка</h1>
+
+  <section class="carousel">
+    <div class="slides" id="slides">
+      <img src="https://placehold.co/900x400/87ceeb/ffffff?text=Slide+1" alt="Slide 1">
+      <img src="https://placehold.co/900x400/ffb6c1/ffffff?text=Slide+2" alt="Slide 2">
+      <img src="https://placehold.co/900x400/90ee90/ffffff?text=Slide+3" alt="Slide 3">
+      <img src="https://placehold.co/900x400/f0e68c/ffffff?text=Slide+4" alt="Slide 4">
+    </div>
+
+    <button class="arrow left" id="prev">❮</button>
+    <button class="arrow right" id="next">❯</button>
+
+    <div class="indicators" id="indicators">
+      <span class="dot active" data-slide="0"></span>
+      <span class="dot" data-slide="1"></span>
+      <span class="dot" data-slide="2"></span>
+      <span class="dot" data-slide="3"></span>
+    </div>
+  </section>
+
+  <section class="images-large">
+    <h2>Зображення для Large-пристроїв</h2>
+    <img src="https://placehold.co/300x200?text=Large+1" alt="">
+    <img src="https://placehold.co/300x200?text=Large+2" alt="">
+    <img src="https://placehold.co/300x200?text=Large+3" alt="">
+  </section>
+
+  <section class="images-medium">
+    <h2>Зображення для Medium-пристроїв</h2>
+    <img src="https://placehold.co/300x200?text=Medium+1" alt="">
+    <img src="https://placehold.co/300x200?text=Medium+2" alt="">
+    <img src="https://placehold.co/300x200?text=Medium+3" alt="">
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
