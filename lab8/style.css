@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #222;
+}
+
+header {
+  background: #222;
+  padding: 15px;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.burger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 20px auto;
+  border-radius: 12px;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slides img {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  border: none;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+
+.indicators {
+  text-align: center;
+  padding: 10px;
+  background: white;
+}
+
+.dot {
+  height: 13px;
+  width: 13px;
+  margin: 5px;
+  background: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #333;
+}
+
+.images-large,
+.images-medium {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.images-large img,
+.images-medium img {
+  margin: 10px;
+  max-width: 100%;
+}
+
+.images-medium {
+  display: none;
+}
+
+/* Medium-пристрої */
+@media (max-width: 767px) {
+  .burger {
+    display: block;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    margin-top: 15px;
+    animation: drop 0.4s ease;
+  }
+
+  .menu.show {
+    display: flex;
+  }
+
+  @keyframes drop {
+    from {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .images-large {
+    display: none;
+  }
+
+  .images-medium {
+    display: block;
+  }
+
+  .arrow {
+    font-size: 22px;
+    padding: 7px;
+  }
+}
